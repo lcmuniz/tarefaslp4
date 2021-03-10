@@ -1,0 +1,26 @@
+.formulario {
+    background-color: white;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+}
+
+.celula1 {
+    width: 100%;
+}
+
+.celula2 {
+    text-align: center;
+    width: 50px;
+}
+
+.entrada {
+    font-size: 20px;
+    padding: 15px;
+    width: 90%;
+}
+
+.mais {
+    font-size: 30px;
+    color: blue;
+}

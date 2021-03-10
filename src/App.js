@@ -1,23 +1,21 @@
-import logo from './logo.svg';
 import './App.css';
 
+import Titulo from './components/Titulo'
+import Formulario from './components/Formulario'
+import Mensagem from './components/Mensagem'
+import ListaTarefas from './components/ListaTarefas';
+import { useState } from 'react';
+
 function App() {
+
+  const [tarefas, setTarefas] = useState(['Tarefa 1', 'Tarefa 2', "Tarefa 3"])
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Titulo texto="Minha Lista de Tarefas" />
+      <Formulario />
+      <ListaTarefas  tarefas={ tarefas } />
+      <Mensagem texto="Uma mensagem de texto" />
     </div>
   );
 }

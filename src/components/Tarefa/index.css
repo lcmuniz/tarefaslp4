@@ -1,0 +1,28 @@
+.item {
+    background-color: #ccf;
+    display: flex;
+    align-items: center;
+    margin: 0;
+    font-size: 20px;
+    padding-left: 20px;
+    padding-right: 20px;
+    border-bottom: 1px solid black;
+}
+
+.circulo {
+    color: blue;
+    cursor: pointer;
+    padding-right: 10px;
+}
+
+.texto {
+    width: 100%;
+}
+
+.lixeira {
+    cursor: pointer
+}
+
+.lixeira:hover {
+    color: red
+}
