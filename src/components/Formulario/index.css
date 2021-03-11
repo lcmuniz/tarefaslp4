@@ -1,6 +1,7 @@
 .formulario {
     background-color: white;
     padding: 20px;
+    padding-right: 10px;
     display: flex;
     align-items: center;
 }
