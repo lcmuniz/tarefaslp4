@@ -16,7 +16,11 @@
 }
 
 .texto {
-    width: 100%;
+    width: 100%;    
+}
+
+.texto-riscado {
+    text-decoration: line-through;
 }
 
 .lixeira {

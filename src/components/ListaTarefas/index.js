@@ -6,7 +6,11 @@ function ListaTarefas(props) {
     return (
         <div className="conteudo">
             <ul className="lista">
-            { props.tarefas.map( tarefa => <Tarefa tarefa={tarefa}  excluir={props.excluir} />  ) }
+            { props.tarefas.map( tarefa => 
+                <Tarefa tarefa={tarefa} 
+                        key={tarefa.id}
+                        excluir={props.excluir} 
+                        alterarStatus={props.alterarStatus} />  ) }
             </ul>
         </div>
     )

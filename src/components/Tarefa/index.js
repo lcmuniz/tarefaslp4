@@ -6,7 +6,11 @@ function Tarefa(props) {
         props.excluir(props.tarefa);
     }
 
-    function obterClasse(tarefa) {
+    function aoAlterarStatus() {
+        props.alterarStatus(props.tarefa)
+    }
+
+    function obterClasseCirculo(tarefa) {
         if (tarefa.completada) {
             return "fa fa-check-circle circulo"
         }
@@ -15,10 +19,19 @@ function Tarefa(props) {
         }
     }
 
+    function obterClasseTexto(tarefa) {
+        if (tarefa.completada) {
+            return "texto texto-riscado"
+        }
+        else {
+            return "texto"
+        }
+    }
+
     return (
         <div className="item">
-            <i className={ obterClasse(props.tarefa) }></i>
-            <p className="texto">{props.tarefa.id} - {props.tarefa.texto}</p>
+            <i className={ obterClasseCirculo(props.tarefa) } onClick={aoAlterarStatus} ></i>
+            <p className={ obterClasseTexto(props.tarefa) }>{props.tarefa.texto}</p>
             <i className="fa fa-trash lixeira" onClick={aoClicar}></i>
         </div>
     )
