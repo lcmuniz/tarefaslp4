@@ -1,86 +1,40 @@
 import './App.css';
-
-import Titulo from './components/Titulo'
-import Formulario from './components/Formulario'
-import Mensagem from './components/Mensagem'
-import ListaTarefas from './components/ListaTarefas';
-import { useEffect, useState } from 'react';
+import LoginScreen from './screens/LoginScreen';
+import ls from 'local-storage'
+import TarefasScreen from './screens/TarefasScreen';
+import { useState } from 'react';
 import axios from 'axios'
 
 function App() {
 
-  useEffect(
-    () => {
-      axios.get('http://localhost:8888/tarefas/').then(
-        resposta => setTarefas(resposta.data)
-      )
-    },
-    []
-  )
+  const [token, setToken] = useState('')
+  const [mensagem, setMensagem] = useState('')
 
-
-  const [tarefas, setTarefas] = useState([])
-
-  function mudarStatus(tarefa) {
-    tarefa.completada = !tarefa.completada
-
-    const ts = tarefas.filter(t => t.id !== tarefa.id)
-
-    axios.post('http://localhost:8888/tarefas/', tarefa)
-
-    const novasTarefas = [...ts, tarefa]
-
-    novasTarefas.sort((a, b) => a.texto.localeCompare(b.texto))
-
-    setTarefas(novasTarefas)
-  }
-
-  function adicionarTarefa(texto) {
-    
-    const novaTarefa = {id: tarefas.length + 1, texto: texto, autor_id: 1, completada: false}
-
-    axios.post('http://localhost:8888/tarefas/', novaTarefa)
-
-    const novasTarefas = [...tarefas, novaTarefa]
-
-    novasTarefas.sort((a, b) => a.texto.localeCompare(b.texto))
-    
-    setTarefas(novasTarefas)
-
-  }
-
-  function excluirTarefa(tarefa) {
-    const novasTarefas = tarefas.filter(t => t.id !== tarefa.id)
-    axios.delete('http://localhost:8888/tarefas/' + tarefa.id)
-    setTarefas(novasTarefas)
-  }
-
-  function obterMensagem() {
-    if (tarefas.length === 0) {
-      return "Não existem tarefas cadastradas"
+  async function logar(autor) {
+    try {
+        const resp = await axios.post('http://localhost:8888/auth/login', autor)
+        setMensagem('')
+        ls.set('token', resp.data.token)
+        ls.set('email', resp.data.autor.email)
+        ls.set('autor_id', resp.data.autor.id)
+        setToken(resp.data.token)
     }
-    else if (tarefas.length === 1) {
-      return "Uma tarefa cadastrada"
-    }
-    else {
-      return tarefas.length + " tarefas cadastradas"
+    catch(err) {
+        setMensagem('Usuário e/ou senha inválidos.')
+        ls.remove('token')
+        ls.remove('email')
+        ls.remove('autor_id')
+        setToken('')
     }
   }
 
+  if (token) {
+    return <TarefasScreen />
+  } 
+  else {
+    return <LoginScreen logar={logar} mensagem={mensagem} />
+  }
 
-
-  return (
-    <div className="App">
-      <Titulo texto="Minha Lista de Tarefas" />
-      <Formulario adicionar={adicionarTarefa} />
-     
-      <ListaTarefas tarefas={ tarefas } 
-          excluir={excluirTarefa} 
-          alterarStatus={mudarStatus} />
-     
-      <Mensagem texto={obterMensagem()} />
-    </div>
-  );
 }
 
 export default App;

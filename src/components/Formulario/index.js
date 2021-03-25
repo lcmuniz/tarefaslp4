@@ -21,7 +21,7 @@ function Formulario(props) {
     return (
         <div className="formulario">
             <div className="celula1">
-                <input ref={entrada} className="entrada" onKeyUp={aoDigitar} />
+                <input ref={entrada} className="entrada border" onKeyUp={aoDigitar} />
             </div>
             <div className="celula2">
                 <i className="fa fa-plus-circle mais" onClick={aoClicar}></i>

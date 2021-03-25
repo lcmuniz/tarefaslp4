@@ -11,7 +11,7 @@ function Tarefa(props) {
     }
 
     function obterClasseCirculo(tarefa) {
-        if (tarefa.completada) {
+        if (tarefa.completada === 'S') {
             return "fa fa-check-circle circulo"
         }
         else {
@@ -20,7 +20,7 @@ function Tarefa(props) {
     }
 
     function obterClasseTexto(tarefa) {
-        if (tarefa.completada) {
+        if (tarefa.completada === 'S') {
             return "texto texto-riscado"
         }
         else {
@@ -29,7 +29,7 @@ function Tarefa(props) {
     }
 
     return (
-        <div className="item">
+        <div className="item p-4">
             <i className={ obterClasseCirculo(props.tarefa) } onClick={aoAlterarStatus} ></i>
             <p className={ obterClasseTexto(props.tarefa) }>{props.tarefa.texto}</p>
             <i className="fa fa-trash lixeira" onClick={aoClicar}></i>
